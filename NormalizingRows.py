@@ -18,3 +18,32 @@ Exercise: Implement normalizeRows() to normalize the rows of a matrix. After app
 原文：https://blog.csdn.net/Koala_Tree/article/details/78057033
 版权声明：本文为博主原创文章，转载请附上博文链接！
 """
+
+import numpy as np
+
+
+def normalizeRows(x):
+    """
+    Implement a function that normalizes each row of the matrix x (to have unit length).
+
+    Argument:
+    x -- A numpy matrix of shape (n, m)
+
+    Returns:
+    x -- The normalized (by row) numpy matrix. You are allowed to modify x.
+    """ ### START CODE HERE ### (≈ 2 lines of code) # Compute x_norm as the norm 2 of x. Use
+    # np.linalg.norm(..., ord = 2, axis = ..., keepdims = True)
+    x_norm = np.linalg.norm(x, axis=1, keepdims=True) #计算每一行的长度，得到一个列向量 # Divide x by its norm. x = x / x_norm #利用numpy的广播，用矩阵与列向量相除。 ### END CODE HERE ### return x
+    return x/x_norm
+
+
+def main():
+
+    x = np.array([[1,2,3],[4,5,6]])
+    print(normalizeRows(x))
+
+
+if __name__ == '__main__':
+    main()
+
+
