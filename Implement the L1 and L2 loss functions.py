@@ -4,7 +4,8 @@ Exercise: Implement the numpy vectorized version of the L1 loss. You may find th
 
 
 import numpy as np
-
+import decimal
+from decimal import Decimal
 
 def L1(yhat, y):
     """
@@ -28,6 +29,5 @@ yhat = np.array([.9, 0.2, 0.1, .4, .9])
 y = np.array([1, 0, 0, 1, 1])
 print("L1 = " + str(L1(yhat,y)))
 print("L2 = " + str(L2(yhat,y)))
-
 
 
