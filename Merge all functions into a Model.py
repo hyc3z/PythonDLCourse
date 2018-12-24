@@ -181,6 +181,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations = 2000, learning_rate
 
     return d
 
+
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
 m_train = train_set_x_orig.shape[0]
 m_test = test_set_x_orig.shape[0]
