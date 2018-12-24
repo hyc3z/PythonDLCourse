@@ -1,5 +1,6 @@
 import numpy as np
 from lr_utils import load_dataset
+import matplotlib.pyplot as plt
 
 
 def sigmoid(x):
@@ -14,6 +15,7 @@ def sigmoid(x):
     """
     return 1.0/(1.0+1/np.exp(x)) #exp: return e raised to the power of x.
 
+
 def initialize_with_zeros(dim):
     w = np.zeros((dim, 1))
     b = 0
@@ -21,9 +23,9 @@ def initialize_with_zeros(dim):
     assert (isinstance(b, float) or isinstance(b, int))
     return w, b
 
+
 def propagate(w, b, X, Y):
     """
-
     :param w: weights, a numpy array size ( num_px * num_px * 3, 1)
     :param b: bias, a scalar
     :param X: data of size (num_px * num_px * 3, number of examples)
@@ -54,6 +56,7 @@ def propagate(w, b, X, Y):
              }
 
     return grads, cost
+
 
 def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):
     """
@@ -105,6 +108,7 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):
                  "db": db}
 
     return params, grads, costs
+
 
 def predict(w, b, X):
     """
@@ -187,3 +191,16 @@ train_set_x = train_set_x_flatten/255.
 test_set_x = test_set_x_flatten/255.
 
 d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations=2000, learning_rate=0.005, print_cost=True)
+index = 1
+
+plt.imshow(test_set_x[:, index].reshape((num_px, num_px, 3)))
+plt.show()
+
+print ("y = " + str(test_set_y[:,index]) + ", you predicted that it is a \"" + classes[int(d["Y_prediction_test"][0, index])].decode("utf-8") +  "\" picture.")
+
+costs = np.squeeze(d['costs'])
+plt.plot(costs)
+plt.ylabel('cost')
+plt.xlabel('iterations (per hundreds)')
+plt.title("Learning rate =" + str(d["learning_rate"]))
+plt.show()
