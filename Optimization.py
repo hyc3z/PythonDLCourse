@@ -136,7 +136,10 @@ def predict(w, b, X):
 
     return Y_prediction
 
-w = np.array([[0.1124579],[0.23106775]])
-b = -0.3
-X = np.array([[1.,-1.1,-3.2],[1.2,2.,0.1]])
-print ("predictions = " + str(predict(w, b, X)))
+
+params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate = 0.009, print_cost = False)
+
+print ("w = " + str(params["w"]))
+print ("b = " + str(params["b"]))
+print ("dw = " + str(grads["dw"]))
+print ("db = " + str(grads["db"]))
