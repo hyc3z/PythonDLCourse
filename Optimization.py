@@ -100,3 +100,43 @@ def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost = False):
                  "db": db}
 
         return params, grads, costs
+
+params, grads, costs = optimize(w, b, X, Y, num_iterations= 100, learning_rate=0.009, print_cost=False)
+
+print("w = " + str(params["w"]))
+print("b = " + str(params["b"]))
+print("dw = " + str(grads["dw"]))
+print("db = " + str(grads["db"]))
+
+def predict(w, b, X):
+    """
+
+    :param w:
+    :param b:
+    :param X: data of size (num_px * num_px * 3, number of examples
+    :return: Y_prediction -- a numpy array (vector) containing all predictions (0/1) for the examples in X
+
+    """
+
+    m = X.shape[1]
+    Y_prediction = np.zeros((1,m))
+    w = w.reshape(X.shape[0], 1)
+
+    # Compute vector "A" predicting the probabilities of a cat being present in the picture
+    A = sigmoid(np.dot(w.T, X) + b)
+
+    for i in range(A.shape[1]):
+        # Convert probabilities A[0,i] to actual predictions p[0,i]
+        if A[0,i] > 0.5:
+            Y_prediction[0,i] = 1
+        else:
+            Y_prediction[0,i] = 0
+
+    assert (Y_prediction.shape == (1,m))
+
+    return Y_prediction
+
+w = np.array([[0.1124579],[0.23106775]])
+b = -0.3
+X = np.array([[1.,-1.1,-3.2],[1.2,2.,0.1]])
+print ("predictions = " + str(predict(w, b, X)))
