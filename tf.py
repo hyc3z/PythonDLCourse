@@ -1,69 +1,33 @@
 import tensorflow as tf
 import numpy as np
+from tensorflow.examples.tutorials.mnist import input_data
 import matplotlib.pyplot as plt
 
+# 下载MNIST数据集到'MNIST_data'文件夹并解压
+mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
-def add_layer(inputs, in_size, out_size, activation_function=None):
-    with tf.name_scope('layer'):
-        with tf.name_scope('weight'):
-            Weights = tf.Variable(tf.random_normal([in_size, out_size]))
-            tf.summary.histogram('weights', Weights)
-        with tf.name_scope('biases'):
-            biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
-            tf.summary.histogram('biases', biases)
-        with tf.name_scope('Y'):
-            Wx_plus_b = tf.matmul(inputs, Weights) + biases
-            tf.summary.histogram('wx_plus_b', Wx_plus_b)
-        if activation_function is None:
-            outputs = Wx_plus_b
-        else:
-            outputs = activation_function(Wx_plus_b)
-        return outputs
+# 设置权重weights和偏置biases作为优化变量，初始值设为0
+weights = tf.Variable(tf.zeros([784, 10]))
+biases = tf.Variable(tf.zeros([10]))
 
+# 构建模型
+x = tf.placeholder("float", [None, 784])
+y = tf.nn.softmax(tf.matmul(x, weights) + biases)                                   # 模型的预测值
+y_real = tf.placeholder("float", [None, 10])                                        # 真实值
 
-x_data = np.linspace(-1,1,300)[:,np.newaxis]
-noise = np.random.normal(0, 0.05, x_data.shape)
-y_data = np.square(x_data) - 0.5 + noise
+cross_entropy = -tf.reduce_sum(y_real * tf.log(y))                                  # 预测值与真实值的交叉熵
+train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)        # 使用梯度下降优化器最小化交叉熵
 
-with tf.name_scope('input'):
-    xs = tf.placeholder(tf.float32,[None,1], name='x_input')
-    ys = tf.placeholder(tf.float32,[None,1], name='y_input')
-
-l1 = add_layer(xs, 1, 10, tf.nn.relu)
-l2 = add_layer(l1, 10, 1)
-
-with tf.name_scope('loss'):
-    loss = tf.reduce_mean(tf.reduce_sum(tf.square(y_data - l2),reduction_indices=[1]))
-    tf.summary.scalar('loss', loss)
-
-with tf.name_scope('train'):
-    train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
-
-init = tf.global_variables_initializer()
+# 开始训练
+init = tf.initialize_all_variables()
 sess = tf.Session()
-file_writer = tf.summary.FileWriter('./logs', sess.graph)
-summaries = tf.summary.merge_all()
 sess.run(init)
-
-# fig = plt.figure()
-# ax = fig.add_subplot(1,1,1)
-# ax.scatter(x_data,y_data)
-# plt.ion()
-
-
 for i in range(2000):
-    sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
-    summ = sess.run(summaries, feed_dict={xs: x_data, ys: y_data})
-    file_writer.add_summary(summ, global_step=i)
-    if not i%50 :
-        print(sess.run(loss, feed_dict={xs: x_data, ys: y_data}))
-        # try:
-        #     ax.lines.remove(lines[0])
-        # except Exception:
-        #     pass
-        # prediction_value = sess.run(l2, feed_dict={xs:x_data})
-        # lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
-        # plt.pause(0.1)
-        # plt.ioff()
-        # plt.show()
+    batch_xs, batch_ys = mnist.train.next_batch(100)                                # 每次随机选取100个数据进行训练，即所谓的“随机梯度下降（Stochastic Gradient Descent，SGD）”
+    sess.run(train_step, feed_dict={x: batch_xs, y_real:batch_ys})                  # 正式执行train_step，用feed_dict的数据取代placeholder
 
+    if i % 100 == 0:
+        # 每训练100次后评估模型
+        correct_prediction = tf.equal(tf.argmax(y, 1), tf.arg_max(y_real, 1))       # 比较预测值和真实值是否一致
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))             # 统计预测正确的个数，取均值得到准确率
+        print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_real: mnist.test.labels}))
