@@ -31,8 +31,11 @@ with tf.name_scope('input'):
 
 l1 = add_layer(xs, 1, 10, tf.nn.relu)
 l2 = add_layer(l1, 10, 1)
+
 with tf.name_scope('loss'):
     loss = tf.reduce_mean(tf.reduce_sum(tf.square(y_data - l2),reduction_indices=[1]))
+    tf.summary.scalar('loss', loss)
+
 with tf.name_scope('train'):
     train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
