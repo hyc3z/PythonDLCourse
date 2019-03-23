@@ -83,8 +83,9 @@ writer = tf.summary.FileWriter('./log', sess.graph)     # write to file
 sess.run(init)
 for i in range(2000):
     batch_xs, batch_ys = mnist.train.next_batch(100)                                # 每次随机选取100个数据进行训练，即所谓的“随机梯度下降（Stochastic Gradient Descent，SGD）”
-    _, result = sess.run([train_step, merge_op], feed_dict={xs: batch_xs, ys:batch_ys, keep_prob:0.5})                  # 正式执行train_step，用feed_dict的数据取代placeholder
-    writer.add_summary(result, i)
+    sess.run(train_step, feed_dict={xs: batch_xs, ys:batch_ys, keep_prob:0.5})                  # 正式执行train_step，用feed_dict的数据取代placeholder
+    # summary,_=sess.run([merge_op, train_step], feed_dict={xs: batch_xs, ys:batch_ys, keep_prob:0.5})                  # 正式执行train_step，用feed_dict的数据取代placeholder
+    # writer.add_summary(summary, i)
     if i % 100 == 0:
         # 每训练100次后评估模型
         print(compute_accuracy(mnist.test.images, mnist.test.labels))
