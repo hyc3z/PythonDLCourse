@@ -53,6 +53,7 @@ model.compile(optimizer='adam',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
+
 x_val = train_data[:10000]
 partial_x_train = train_data[10000:]
 
