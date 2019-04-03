@@ -18,7 +18,7 @@ def plot_graphs(history, string):
 dataset, info = tfds.load('imdb_reviews/subwords8k', with_info=True,
                           as_supervised=True)
 train_dataset, test_dataset = dataset['train'], dataset['test']
-
+print(test_dataset)
 tokenizer = info.features['text'].encoder
 
 print ('Vocabulary size: {}'.format(tokenizer.vocab_size))
@@ -56,3 +56,9 @@ model.summary()
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
+
+history = model.fit(train_dataset, epochs=10,
+                    validation_data=test_dataset)
+
+model.save('./Text_classification_with_an_RNN.h5')
+
