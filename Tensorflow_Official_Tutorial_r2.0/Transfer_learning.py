@@ -1,7 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
 import os
-
 import tensorflow as tf
 from tensorflow.python import keras
 print("TensorFlow version is ", tf.__version__)
