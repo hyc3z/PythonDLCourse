@@ -31,7 +31,7 @@ print ('Total validation cat images:', len(os.listdir(validation_cats_dir)))
 validation_dogs_dir = os.path.join(validation_dir, 'dogs')
 print ('Total validation dog images:', len(os.listdir(validation_dogs_dir)))
 
-image_size = 160 # All images will be resized to 160x160
+image_size = 224 # All images will be resized to 160x160
 batch_size = 32
 
 # Rescale all images by 1./255 and apply image augmentation
@@ -58,7 +58,7 @@ validation_generator = validation_datagen.flow_from_directory(
 IMG_SHAPE = (image_size, image_size, 3)
 
 # Create the base model from the pre-trained model MobileNet V2
-base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
+base_model = keras.applications.NASNetMobile(input_shape=IMG_SHAPE,
                                                include_top=False,
                                                weights='imagenet')
 
