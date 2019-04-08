@@ -57,7 +57,7 @@ validation_generator = validation_datagen.flow_from_directory(
 IMG_SHAPE = (image_size, image_size, 3)
 
 # Create the base model from the pre-trained model MobileNet V2
-base_model = keras.applications.NASNetMobile(input_shape=IMG_SHAPE,
+base_model = keras.applications.ResNet50(input_shape=IMG_SHAPE,
                                                include_top=False,
                                                weights='imagenet')
 
