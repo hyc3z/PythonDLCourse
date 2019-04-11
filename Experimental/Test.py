@@ -125,3 +125,4 @@ def VGG16():
     VGG16.summary()
     return VGG16
 
+VGG16()
