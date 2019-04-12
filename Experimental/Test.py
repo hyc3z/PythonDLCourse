@@ -12,7 +12,7 @@ last_dir = ''
 category = 0
 
 image_size = 224 # All images will be resized to 160x160
-batch_size = 32
+batch_size = 1024
 
 # Rescale all images by 1./255 and apply image augmentation
 train_datagen = keras.preprocessing.image.ImageDataGenerator(
@@ -22,16 +22,18 @@ validation_datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255
 
 # Flow training images in batches of 20 using train_datagen generator
 train_generator = train_datagen.flow_from_directory(
-                train_dir,  # Source directory for the training images
-                target_size=(image_size, image_size),
-                # Since we use binary_crossentropy loss, we need binary labels
-                )
+    train_dir,  # Source directory for the training images
+    target_size=(image_size, image_size),
+    batch_size=batch_size,
+    # Since we use binary_crossentropy loss, we need binary labels
+    )
 
 # Flow validation images in batches of 20 using test_datagen generator
 validation_generator = validation_datagen.flow_from_directory(
-                val_dir, # Source directory for the validation images
-                target_size=(image_size, image_size),
-                )
+    val_dir, # Source directory for the validation images
+    target_size=(image_size, image_size),
+    batch_size=batch_size,
+)
 
 IMG_SHAPE = (image_size, image_size, 3)
 np.random.seed(1000)
