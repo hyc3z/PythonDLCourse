@@ -5,25 +5,11 @@ from tensorflow.python.keras.layers.normalization import BatchNormalization
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-base_dir = '/home/hu/tensorflow_datasets/cats_vs_dogs/PetImages'
-train_dir = os.path.join(base_dir, 'train')
-validation_dir = os.path.join(base_dir, 'validation')
-print(train_dir)
-# Directory with our training cat pictures
-train_cats_dir = os.path.join(train_dir, 'cats')
-print ('Total training cat images:', len(os.listdir(train_cats_dir)))
 
-# Directory with our training dog pictures
-train_dogs_dir = os.path.join(train_dir, 'dogs')
-print ('Total training dog images:', len(os.listdir(train_dogs_dir)))
-
-# Directory with our validation cat pictures
-validation_cats_dir = os.path.join(validation_dir, 'cats')
-print ('Total validation cat images:', len(os.listdir(validation_cats_dir)))
-
-# Directory with our validation dog pictures
-validation_dogs_dir = os.path.join(validation_dir, 'dogs')
-print ('Total validation dog images:', len(os.listdir(validation_dogs_dir)))
+train_dir='/home/hu/Downloads/ILSVRC/Data/CLS-LOC/train/'
+val_dir='/home/hu/Downloads/ILSVRC/Data/CLS-LOC/val'
+last_dir = ''
+category = 0
 
 image_size = 224 # All images will be resized to 160x160
 batch_size = 32
@@ -38,16 +24,14 @@ validation_datagen = keras.preprocessing.image.ImageDataGenerator(rescale=1./255
 train_generator = train_datagen.flow_from_directory(
                 train_dir,  # Source directory for the training images
                 target_size=(image_size, image_size),
-                batch_size=batch_size,
                 # Since we use binary_crossentropy loss, we need binary labels
-                class_mode='binary')
+                )
 
 # Flow validation images in batches of 20 using test_datagen generator
 validation_generator = validation_datagen.flow_from_directory(
-                validation_dir, # Source directory for the validation images
+                val_dir, # Source directory for the validation images
                 target_size=(image_size, image_size),
-                batch_size=batch_size,
-                class_mode='binary')
+                )
 
 IMG_SHAPE = (image_size, image_size, 3)
 np.random.seed(1000)
@@ -55,7 +39,7 @@ np.random.seed(1000)
 
 def AlexNet():
     AlexNet = Sequential()
-    AlexNet.add(Conv2D(96,(11,11),strides=(4,4),input_shape=(227,227,3),padding='valid',activation='relu',kernel_initializer='uniform'))
+    AlexNet.add(Conv2D(96,(11,11),strides=(4,4),input_shape=(224,224,3),padding='valid',activation='relu',kernel_initializer='uniform'))
     AlexNet.add(MaxPooling2D(pool_size=(3,3),strides=(2,2)))
     AlexNet.add(Conv2D(256,(5,5),strides=(1,1),padding='same',activation='relu',kernel_initializer='uniform'))
     AlexNet.add(MaxPooling2D(pool_size=(3,3),strides=(2,2)))
@@ -125,4 +109,40 @@ def VGG16():
     VGG16.summary()
     return VGG16
 
-VGG16()
+
+model = AlexNet()
+epochs = 10
+steps_per_epoch = train_generator.n // batch_size
+validation_steps = validation_generator.n // batch_size
+
+history = model.fit_generator(train_generator,
+                              steps_per_epoch=steps_per_epoch,
+                              epochs=epochs,
+                              workers=8,
+                              validation_data=validation_generator,
+                              validation_steps=validation_steps)
+
+model.save('./Transfer_learning.h5')
+acc = history.history['acc']
+val_acc = history.history['val_acc']
+
+loss = history.history['loss']
+val_loss = history.history['val_loss']
+
+plt.figure(figsize=(8, 8))
+plt.subplot(2, 1, 1)
+plt.plot(acc, label='Training Accuracy')
+plt.plot(val_acc, label='Validation Accuracy')
+plt.legend(loc='lower right')
+plt.ylabel('Accuracy')
+plt.ylim([min(plt.ylim()),1])
+plt.title('Training and Validation Accuracy')
+
+plt.subplot(2, 1, 2)
+plt.plot(loss, label='Training Loss')
+plt.plot(val_loss, label='Validation Loss')
+plt.legend(loc='upper right')
+plt.ylabel('Cross Entropy')
+plt.ylim([0,max(plt.ylim())])
+plt.title('Training and Validation Loss')
+plt.show()

@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-base_dir = '/home/hu/tensorflow_datasets/cats_vs_dogs/PetImages'
+base_dir = '/home/hu/Downloads/PetImages'
 train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 print(train_dir)
