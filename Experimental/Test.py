@@ -12,7 +12,7 @@ last_dir = ''
 category = 0
 
 image_size = 224 # All images will be resized to 160x160
-batch_size = 1024
+batch_size = 512
 
 # Rescale all images by 1./255 and apply image augmentation
 train_datagen = keras.preprocessing.image.ImageDataGenerator(
