@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import tensorflow as tf
+from keras_applications import resnet50
 
 train_dir='/home/hu/Downloads/ILSVRC/Data/CLS-LOC/train/'
 val_dir='/home/hu/Downloads/ILSVRC/Data/CLS-LOC/val'
