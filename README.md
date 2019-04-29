@@ -1,6 +1,6 @@
 # 
-Hi, Everyone! My Github id is `Hycdog`, You can contact me at any time with my email address `
-tubao9hao@126.com`. I'm currently a college student from China, and I'm learning deep learning by myself.
+Hi, Everyone! My Github id is [@Hycdog](https://github.com/Hycdog), You can contact me at any time with my email address `
+tubao9hao@126.com`. I'm currently a college student, and I'm learning deep learning by myself.
 Here is my learning materials that I obtained from multiple sources,
 and I decide to publish them online so that more people can share these wonderful resources.
 If there is any problem, feel free to contact me at any time!   
