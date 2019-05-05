@@ -1,37 +1,3 @@
-# 
-Hi, Everyone! My Github id is [@Hycdog](https://github.com/Hycdog), You can contact me at any time with my email address `
-tubao9hao@126.com`. I'm currently a college student, and I'm learning deep learning by myself.
-Here is my learning materials that I obtained from multiple sources,
-and I decide to publish them online so that more people can share these wonderful resources.
-If there is any problem, feel free to contact me at any time!   
-
-The [`Experimental`](./Experimental) folder contains the scripts that I run for experiments.
-
-The [`mnist`](./mnist) folder contains the classic mnist training data
-
-I want to specially mention the [`Morvan_tutorial`](./Morvan_tutorial) folder,
-these are the scripts that comes from a very good deep learning vlogger,
-[@MorvanZhou](https://github.com/MorvanZhou) you can checkout his repos and scripts, and his video courses, which are very helpful!
-
-The [`Notes`](./Notes) folder contains the notes I took (pretty much a mess),
-but hope you guys don't mind!
-
-The [`Tensorflow_Official_Tutorial`](./Tensorflow_Official_Tutorial) folder contains the scripts
-from [tensorflow official website](https://tensorflow.google.cn/) and I think following the tutorials can really help you a lot.
-You can checkout the tutorial [here](https://tensorflow.google.cn/tutorials/).
-
-The [`Tensorflow_Official_Tutorial_r2.0`](./Tensorflow_Official_Tutorial_r2.0)contains v2.0 of tensorflow tutorial.Again, you can checkout [here](https://tensorflow.google.cn/alpha)
-
-
-The [`References`](./References) folder contains the papers from [arXiv](https://arxiv.org) and other websites.
-The authors of the papers have the copyright.
- 
-Therefore the documents inside the [`References`](./References) are used and only used for studying and sharing technology, 
-NOT suitable for any business use, and NOT suitable for printing and selling, NOT allowed to edit or copy without the permission of the authors! 
-If you are the original authors of the papers, and you disapprove your paper to be attached in this repository in documents , please contact me, and we'll remove the corresponding files from the repository.
-
-Thanks.
-
 Dean, J., Corrado, G. S., Monga, R., Chen, K., Devin, M., Le, Q. V, … Ng, A. Y. (n.d.). Large Scale Distributed Deep Networks. 1–11. https://doi.org/10.1109/ICDAR.2011.95
 
 【LeNet-5】.pdf. (n.d.).
