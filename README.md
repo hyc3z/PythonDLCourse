@@ -1,11 +1,12 @@
-#PyDLCourse 
+# PyDLCourse
+ 
 Hi, Everyone! My Github id is [@Hycdog](https://github.com/Hycdog), You can contact me at any time with my email address `
 tubao9hao@126.com`. I'm currently a college student, and I'm learning deep learning by myself.
 Here is my learning materials that I obtained from multiple sources,
 and I decide to publish them online so that more people can share these wonderful resources.
 If there is any problem, feel free to contact me at any time!   
 
-##Indexes
+## Indexes
 
 The [`Experimental`](./Experimental) folder contains the scripts that I run for experiments.
 
@@ -31,7 +32,8 @@ NOT suitable for any business use, and NOT suitable for printing and selling, NO
 If you are the original authors of the papers, and you disapprove your paper to be attached in this repository in documents , please contact me, and we'll remove the corresponding files from the repository.
 
 Thanks. 
-##Refences
+
+## Refences
 
 Dean, J., Corrado, G. S., Monga, R., Chen, K., Devin, M., Le, Q. V, … Ng, A. Y. (n.d.). Large Scale Distributed Deep Networks. 1–11. https://doi.org/10.1109/ICDAR.2011.95
 
