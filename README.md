@@ -6,6 +6,7 @@ and I decide to publish them online so that more people can share these wonderfu
 If there is any problem, feel free to contact me at any time!   
 
 ##Indexes
+
 The [`Experimental`](./Experimental) folder contains the scripts that I run for experiments.
 
 I want to specially mention the [`Morvan_tutorial`](./Morvan_tutorial) folder,
@@ -29,8 +30,7 @@ Therefore the documents inside the [`References`](./References) are used and onl
 NOT suitable for any business use, and NOT suitable for printing and selling, NOT allowed to edit or copy without the permission of the authors! 
 If you are the original authors of the papers, and you disapprove your paper to be attached in this repository in documents , please contact me, and we'll remove the corresponding files from the repository.
 
-Thanks.
-
+Thanks. 
 ##Refences
 
 Dean, J., Corrado, G. S., Monga, R., Chen, K., Devin, M., Le, Q. V, … Ng, A. Y. (n.d.). Large Scale Distributed Deep Networks. 1–11. https://doi.org/10.1109/ICDAR.2011.95
