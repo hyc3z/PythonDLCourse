@@ -8,8 +8,6 @@ If there is any problem, feel free to contact me at any time!
 ##Indexes
 The [`Experimental`](./Experimental) folder contains the scripts that I run for experiments.
 
-The [`mnist`](./mnist) folder contains the classic mnist training data
-
 I want to specially mention the [`Morvan_tutorial`](./Morvan_tutorial) folder,
 these are the scripts that comes from a very good deep learning vlogger,
 [@MorvanZhou](https://github.com/MorvanZhou) you can checkout his repos and scripts, and his video courses, which are very helpful!
